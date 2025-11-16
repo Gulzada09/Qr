@@ -1,22 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Рандом топ таңдау</title>
+<title>Рандом Топ Таңдау</title>
 </head>
 <body style="font-size:30px; text-align:center; margin-top:50px;">
 
 <h2>Рандом Топ Таңдағыш</h2>
 
-<button onclick="generate()" style="font-size:25px;">Топты Таңдау</button>
-
 <p id="result" style="margin-top:30px; font-weight:bold;"></p>
 
 <script>
-function generate() {
     const groups = ["Арифметика", "Прогрессия", "Тізбек"];
     const randomIndex = Math.floor(Math.random() * groups.length);
     document.getElementById("result").innerText = "Сіздің тобыңыз: " + groups[randomIndex];
-}
 </script>
 
 </body>
