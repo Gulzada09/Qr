@@ -30,33 +30,41 @@
     const assigned = [];
 
     function assignGroup() {
-        const name = document.getElementById("studentName").value.trim();
+        const input = document.getElementById("studentName");
+        const name = input.value.trim();
 
         if (name === "") {
             alert("Оқушының аты-жөнін енгізіңіз!");
             return;
         }
 
-        // Әр оқушыға рандом топ беру
+        // Рандом топ тағайындау
         const randomGroup = groups[Math.floor(Math.random() * groups.length)];
-        assigned.push({ name: name, group: randomGroup });
 
-        // Экранда толық тізімді көрсету
-        document.getElementById("list").innerHTML = assigned
-            .map(s => `<div class='student'><b>${s.name}</b> → <b>${s.group}</b></div>`)
-            .join("");
+        // Жаңа оқушыны тізімге қосу
+        assigned.push({ name, group: randomGroup });
 
-        document.getElementById("studentName").value = "";
+        // Экрандағы тізімді жаңарту
+        const listDiv = document.getElementById("list");
+        listDiv.innerHTML = "";
+        assigned.forEach(s => {
+            const div = document.createElement("div");
+            div.className = "student";
+            div.innerHTML = `<b>${s.name}</b> → <b>${s.group}</b>`;
+            listDiv.appendChild(div);
+        });
+
+        // Input тазалау және фокус қайта беру
+        input.value = "";
+        input.focus();
     }
 
-    // Enter басқанда да жұмыс істесін
+    // Enter басқанда жұмыс істеу
     document.getElementById("studentName").addEventListener("keydown", function(e) {
-        if (e.key === "Enter") {
-            assignGroup();
-        }
+        if (e.key === "Enter") assignGroup();
     });
 
-    // Батырмаға басқанда жұмыс істеу
+    // Батырма басқанда жұмыс істеу
     document.getElementById("assignBtn").addEventListener("click", assignGroup);
 </script>
 
