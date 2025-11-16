@@ -1,72 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Оқушыларды рандом топқа бөлу</title>
-    <style>
-        body { font-family: Arial; padding: 20px; }
-        h1 { color: #333; }
-        input { padding: 8px; width: 300px; margin-top: 10px; }
-        button { padding: 8px 16px; margin-left: 10px; font-size: 16px; cursor: pointer; }
-        .result { margin-top: 20px; }
-        .student { padding: 6px 0; font-size: 18px; }
-    </style>
+<meta charset="UTF-8">
+<title>Оқушыларды рандом топқа бөлу</title>
 </head>
 <body>
-
 <h1>Оқушыларды 3 топқа рандом бөлу</h1>
 
 <label>Оқушының аты-жөні:</label><br>
 <input type="text" id="studentName" placeholder="Атыңызды енгізіңіз">
 <button id="assignBtn">Тобыңызды білу</button>
 
-<div class="result">
-    <h2>Барлық оқушылар тізімі:</h2>
-    <div id="list"></div>
-</div>
+<div id="list"></div>
 
 <script>
-    const groups = ["Арифметика", "Прогрессия", "Тізбек"];
-    const assigned = [];
+const groups = ["Арифметика", "Прогрессия", "Тізбек"];
+const assigned = [];
 
-    function assignGroup() {
-        const input = document.getElementById("studentName");
-        const name = input.value.trim();
+function assignGroup() {
+    const input = document.getElementById("studentName");
+    const name = input.value.trim();
+    if(!name) { alert("Оқушының аты-жөнін енгізіңіз!"); return; }
 
-        if (name === "") {
-            alert("Оқушының аты-жөнін енгізіңіз!");
-            return;
-        }
+    const randomGroup = groups[Math.floor(Math.random()*groups.length)];
+    assigned.push({name, group: randomGroup});
 
-        // Рандом топ тағайындау
-        const randomGroup = groups[Math.floor(Math.random() * groups.length)];
-
-        // Жаңа оқушыны тізімге қосу
-        assigned.push({ name, group: randomGroup });
-
-        // Экрандағы тізімді жаңарту
-        const listDiv = document.getElementById("list");
-        listDiv.innerHTML = "";
-        assigned.forEach(s => {
-            const div = document.createElement("div");
-            div.className = "student";
-            div.innerHTML = `<b>${s.name}</b> → <b>${s.group}</b>`;
-            listDiv.appendChild(div);
-        });
-
-        // Input тазалау және фокус қайта беру
-        input.value = "";
-        input.focus();
-    }
-
-    // Enter басқанда жұмыс істеу
-    document.getElementById("studentName").addEventListener("keydown", function(e) {
-        if (e.key === "Enter") assignGroup();
+    const listDiv = document.getElementById("list");
+    listDiv.innerHTML = "";
+    assigned.forEach(s => {
+        listDiv.innerHTML += `<div>${s.name} → ${s.group}</div>`;
     });
 
-    // Батырма басқанда жұмыс істеу
-    document.getElementById("assignBtn").addEventListener("click", assignGroup);
-</script>
+    input.value = "";
+    input.focus();
+}
 
+document.getElementById("assignBtn").addEventListener("click", assignGroup);
+document.getElementById("studentName").addEventListener("keydown", function(e){
+    if(e.key === "Enter") assignGroup();
+});
+</script>
 </body>
 </html>
