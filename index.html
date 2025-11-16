@@ -6,27 +6,26 @@
     <style>
         body { font-family: Arial; padding: 20px; }
         h1 { color: #333; }
-        input { padding: 8px; width: 250px; }
-        button { padding: 8px 15px; margin-left: 10px; }
+        input { padding: 8px; width: 300px; margin-top: 10px; }
+        button { padding: 8px 16px; margin-left: 10px; font-size: 16px; cursor: pointer; }
         .result { margin-top: 20px; }
-        .student { padding: 5px 0; font-size: 18px; }
+        .student { padding: 6px 0; font-size: 18px; }
     </style>
 </head>
 <body>
 
 <h1>Оқушыларды 3 топқа рандом бөлу</h1>
 
-<label>Оқушының аты:</label><br>
-<input type="text" id="studentName" placeholder="Атын енгіз">
-<button onclick="assignGroup()">Бөлу</button>
+<label>Оқушының аты-жөні:</label><br>
+<input type="text" id="studentName" placeholder="Атыңызды енгізіңіз">
+<button id="assignBtn">Тобыңызды білу</button>
 
 <div class="result">
-    <h2>Нәтиже:</h2>
+    <h2>Барлық оқушылар тізімі:</h2>
     <div id="list"></div>
 </div>
 
 <script>
-    // Топтардың нақты аттары
     const groups = ["Арифметика", "Прогрессия", "Тізбек"];
     const assigned = [];
 
@@ -34,22 +33,31 @@
         const name = document.getElementById("studentName").value.trim();
 
         if (name === "") {
-            alert("Оқушының атын енгіз!");
+            alert("Оқушының аты-жөнін енгізіңіз!");
             return;
         }
 
-        // Рандом топ таңдау
+        // Әр оқушыға рандом топ беру
         const randomGroup = groups[Math.floor(Math.random() * groups.length)];
-
         assigned.push({ name: name, group: randomGroup });
 
-        // Экранға шығару
+        // Экранда толық тізімді көрсету
         document.getElementById("list").innerHTML = assigned
-            .map(s => <div class='student'><b>${s.name}</b> → ${s.group}</div>)
+            .map(s => `<div class='student'><b>${s.name}</b> → <b>${s.group}</b></div>`)
             .join("");
 
         document.getElementById("studentName").value = "";
     }
+
+    // Enter басқанда да жұмыс істесін
+    document.getElementById("studentName").addEventListener("keydown", function(e) {
+        if (e.key === "Enter") {
+            assignGroup();
+        }
+    });
+
+    // Батырмаға басқанда жұмыс істеу
+    document.getElementById("assignBtn").addEventListener("click", assignGroup);
 </script>
 
 </body>
