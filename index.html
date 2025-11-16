@@ -9,3 +9,33 @@
     <p>Бұл тесттік бет. Енді QR-код үшін қолдана аласың.</p>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сыныпты топқа бөлу</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f7f9fc; }
+    h1 { color: #34495e; }
+    .top { font-size: 2.5em; margin-top: 20px; color: #e67e22; }
+    button { padding: 10px 20px; font-size: 1em; margin-top: 30px; cursor: pointer; border: none; background-color: #3498db; color: white; border-radius: 5px; }
+    button:hover { background-color: #2980b9; }
+  </style>
+</head>
+<body>
+  <h1>Сіздің топыңыз:</h1>
+  <div class="top" id="topName">...</div>
+  <button onclick="chooseGroup()">Тағы бір рет таңдау</button>
+
+  <script>
+    const groups = ["Арифметика", "Прогрессия", "Тізбек"];
+    function chooseGroup() {
+      const randomIndex = Math.floor(Math.random() * groups.length);
+      document.getElementById('topName').textContent = groups[randomIndex];
+    }
+    // Автоматты түрде рандом таңдау
+    chooseGroup();
+  </script>
+</body>
+</html>
