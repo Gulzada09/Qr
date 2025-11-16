@@ -1,37 +1,56 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Сіздің тобыңыз</title>
-  <style>
-    body{
-      font-family: Arial, sans-serif;
-      text-align:center;
-      padding:60px;
-      background:#f7fbff;
-      color:#222;
-    }
-    h1{ font-size:28px; margin-bottom:20px; }
-    .group{
-      font-size:40px;
-      font-weight:700;
-      color:#e67e22;
-      margin-top:10px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Оқушыларды рандом топқа бөлу</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        h1 { color: #333; }
+        input { padding: 8px; width: 250px; }
+        button { padding: 8px 15px; margin-left: 10px; }
+        .result { margin-top: 20px; }
+        .student { padding: 5px 0; font-size: 18px; }
+    </style>
 </head>
 <body>
-  <h1>Сіздің тобыңыз</h1>
-  <div class="group" id="groupName">...</div>
 
-  <script>
-    (function(){
-      const groups = ["1-топ: Арифметика", "2-топ: Прогрессия", "3-топ: Тізбек"];
-      // Бір рет қана рандом таңдау
-      const i = Math.floor(Math.random() * groups.length);
-      document.getElementById('groupName').textContent = groups[i];
-    })();
-  </script>
+<h1>Оқушыларды 3 топқа рандом бөлу</h1>
+
+<label>Оқушының аты:</label><br>
+<input type="text" id="studentName" placeholder="Атын енгіз">
+<button onclick="assignGroup()">Бөлу</button>
+
+<div class="result">
+    <h2>Нәтиже:</h2>
+    <div id="list"></div>
+</div>
+
+<script>
+    // Топтардың нақты аттары
+    const groups = ["Арифметика", "Прогрессия", "Тізбек"];
+    const assigned = [];
+
+    function assignGroup() {
+        const name = document.getElementById("studentName").value.trim();
+
+        if (name === "") {
+            alert("Оқушының атын енгіз!");
+            return;
+        }
+
+        // Рандом топ таңдау
+        const randomGroup = groups[Math.floor(Math.random() * groups.length)];
+
+        assigned.push({ name: name, group: randomGroup });
+
+        // Экранға шығару
+        document.getElementById("list").innerHTML = assigned
+            .map(s => <div class='student'><b>${s.name}</b> → ${s.group}</div>)
+            .join("");
+
+        document.getElementById("studentName").value = "";
+    }
+</script>
+
 </body>
 </html>
