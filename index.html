@@ -1,41 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>QR Test Page</title>
+<title>Рандом топ таңдау</title>
 </head>
-<body>
-    <h1>GitHub Pages жұмыс істеп тұр!</h1>
-    <p>Бұл тесттік бет. Енді QR-код үшін қолдана аласың.</p>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="kk">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Сыныпты топқа бөлу</title>
-  <style>
-    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f7f9fc; }
-    h1 { color: #34495e; }
-    .top { font-size: 2.5em; margin-top: 20px; color: #e67e22; }
-    button { padding: 10px 20px; font-size: 1em; margin-top: 30px; cursor: pointer; border: none; background-color: #3498db; color: white; border-radius: 5px; }
-    button:hover { background-color: #2980b9; }
-  </style>
-</head>
-<body>
-  <h1>Сіздің топыңыз:</h1>
-  <div class="top" id="topName">...</div>
-  <button onclick="chooseGroup()">Тағы бір рет таңдау</button>
+<body style="font-size:30px; text-align:center; margin-top:50px;">
 
-  <script>
+<h2>Рандом Топ Таңдағыш</h2>
+
+<button onclick="generate()" style="font-size:25px;">Топты Таңдау</button>
+
+<p id="result" style="margin-top:30px; font-weight:bold;"></p>
+
+<script>
+function generate() {
     const groups = ["Арифметика", "Прогрессия", "Тізбек"];
-    function chooseGroup() {
-      const randomIndex = Math.floor(Math.random() * groups.length);
-      document.getElementById('topName').textContent = groups[randomIndex];
-    }
-    // Автоматты түрде рандом таңдау
-    chooseGroup();
-  </script>
+    const randomIndex = Math.floor(Math.random() * groups.length);
+    document.getElementById("result").innerText = "Сіздің тобыңыз: " + groups[randomIndex];
+}
+</script>
+
 </body>
 </html>
