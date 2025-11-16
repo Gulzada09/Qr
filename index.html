@@ -1,19 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="kk">
 <head>
-<title>Рандом Топ Таңдау</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Сіздің тобыңыз</title>
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      text-align:center;
+      padding:60px;
+      background:#f7fbff;
+      color:#222;
+    }
+    h1{ font-size:28px; margin-bottom:20px; }
+    .group{
+      font-size:40px;
+      font-weight:700;
+      color:#e67e22;
+      margin-top:10px;
+    }
+  </style>
 </head>
-<body style="font-size:30px; text-align:center; margin-top:50px;">
+<body>
+  <h1>Сіздің тобыңыз</h1>
+  <div class="group" id="groupName">...</div>
 
-<h2>Рандом Топ Таңдағыш</h2>
-
-<p id="result" style="margin-top:30px; font-weight:bold;"></p>
-
-<script>
-    const groups = ["Арифметика", "Прогрессия", "Тізбек"];
-    const randomIndex = Math.floor(Math.random() * groups.length);
-    document.getElementById("result").innerText = "Сіздің тобыңыз: " + groups[randomIndex];
-</script>
-
+  <script>
+    (function(){
+      const groups = ["1-топ: Арифметика", "2-топ: Прогрессия", "3-топ: Тізбек"];
+      // Бір рет қана рандом таңдау
+      const i = Math.floor(Math.random() * groups.length);
+      document.getElementById('groupName').textContent = groups[i];
+    })();
+  </script>
 </body>
 </html>
